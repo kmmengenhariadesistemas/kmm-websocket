@@ -1,3 +1,3 @@
 # kmm-websocket
 
-Módulo de testes
+Módulo de teste da integração KMM Git
