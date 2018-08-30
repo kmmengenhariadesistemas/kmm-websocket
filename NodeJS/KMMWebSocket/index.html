@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Socket.IO chat</title>
+    <script>document.write('<base href="' + document.location + '" />');</script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { font: 13px Helvetica, Arial; }
+      form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
+      form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
+      form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
+      #messages { list-style-type: none; margin: 0; padding: 0; }
+      #messages li { padding: 5px 10px; }
+      #messages li:nth-child(odd) { background: #eee; }
+    </style>
+  </head>
+  <body>
+    <ul id="messages"></ul>
+    <form action="" onsubmit="return false">
+      <input id="m" autocomplete="off" /><button type="button" onclick="send()">Send</button>
+      <input id="room" autocomplete="off" /><button type="button" value="teste" onclick="joinRoom()">Join Room</button>
+    </form>
+    
+      <script src="socket.io/socket.io.js"></script>
+      <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+      //var socket = io("http://updateagent.kmm.com.br", { path: document.location.pathname + 'socket.io' });
+      //var socket = io("http://portal.kmm.com.br", {path:'/websocket/ws/socket.io'});
+      //var socket = io("http://localhost:4327", {path:'/socket.io'});
+      var socket = io();
+      $(function () {
+        socket.emit('auth', {token: "eyJpYXQiOjE1MDUyMjM1NjEsImp0aSI6Ik16Y3dNVFUwTWc9PSIsImlzcyI6InBvcnRhbC5rbW0uY29tLmJyIiwibmJmIjoxNTA1MjIzNTY2LCJleHAiOjE1MjY4MjM1NjYsImRhdGEiOnsidXNlcm5hbWUiOiJhZG1pbmNvcnAiLCJwYXNzd29yZCI6InErNktaU1dteWdadnR1N0c3T2J4TVE9PSIsImNvZF9nZXN0YW8iOjksImZpbGlhaXMiOm51bGx9fQ==.MTUwMmY5YTcwOWViYTdjNzdiMGFkZGU4Y2YyMTYwZWYyYTljOTkwYTE0ZTJiMDA3MzJlNzUyN2YyNzg5MmY0YQ=="});
+        socket.on('message', function(msg){
+          console.log(msg);
+          $('#messages').append($('<li>').text(msg.message));
+          window.scrollTo(0, document.body.scrollHeight);
+        });
+      });
+      function send() {
+         socket.emit('sendMessage', { room: $('#room').val(), message:$('#m').val() });
+         $('#m').val('');
+      }
+      function joinRoom() {
+      console.log("joining");
+         socket.emit('joinRoom', $('#room').val());
+      }
+    </script>
+  </body>
+</html>
