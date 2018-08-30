@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<kdl codModulo="M011" versao="1.0.1">
+   <parametro codigo="M011-P0001" parametro_grupo_id="55" parametro_tipo_id="3" permite_editar="true">
+      <descricao>URL para envio de mensagens nos canais do WebSocket</descricao>
+      <finalidade>URL para envio de mensagens nos canais do WebSocket</finalidade>
+      <onde_usado>WebSocket</onde_usado>
+      <valor_default>http://localhost:4327/</valor_default>
+   </parametro>
+</kdl>
