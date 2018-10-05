@@ -152,7 +152,7 @@ io.on('connection', function(socket){
     console.log(new Date().toISOString()+" Leaving room: "+msg, socket.id);
     socket.in('room-monitor').emit('message', {op:'leave', room: msg, socket: socket.id });
     if (Object.keys(io.sockets.adapter.rooms[msg].sockets).length == 1) {
-      socket.in('room-monitor').emit('message', {op:'leaveRoom', room: room });
+      socket.in('room-monitor').emit('message', {op:'leaveRoom', room: msg });
     }
     socket.leave(msg);
     
