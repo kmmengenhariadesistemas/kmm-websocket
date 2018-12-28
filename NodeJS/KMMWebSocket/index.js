@@ -123,7 +123,7 @@ io.on('connection', function(socket){
        return;
     }
 
-    console.log(new Date().toISOString()+" Sending message on room: "+dados.room, dados);
+    //console.log(new Date().toISOString()+" Sending message on room: "+dados.room, dados);
     io.sockets.in(dados.room).emit('message', dados);
   });
   socket.on("joinRoom", function(msg) {
